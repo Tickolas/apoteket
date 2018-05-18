@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { getProducts } from '../util/ShopUtil'
+import Products from './product/Products'
 
 export default class App extends Component {
   constructor (props) {
@@ -12,7 +13,6 @@ export default class App extends Component {
 
   componentDidMount () {
     getProducts().then(products => {
-      console.log('products', products)
       this.setState({products})
     })
   }
@@ -20,9 +20,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        {this.state.products.map(product => {
-          return <p>{product.Name}</p>
-        })}
+        <Products products={this.state.products} />
       </div>
     )
   }
