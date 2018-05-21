@@ -7,9 +7,11 @@ const Products = ({products}) => {
   return (
     <div className={style.products}>
       {products.map(product => {
-        return (
-          <Product product={product} />
-        )
+        if (product.Name) {
+          return (
+            <Product product={product} />
+          )
+        }
       })}
     </div>
   )

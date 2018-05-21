@@ -6,6 +6,10 @@ $border-color: black;
   flex-flow: row wrap;
 }
 
+.product--disabled {
+  background-color: gray;
+}
+
 .product__imageContainer {
   max-width: 40px;
   height: 40px;
