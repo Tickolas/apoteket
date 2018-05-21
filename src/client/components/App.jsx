@@ -11,7 +11,7 @@ export default class App extends Component {
 
     this.state = {
       products: [],
-      cart: {Items: []}
+      cart: {Items: [], Total: 0}
     }
   }
 
@@ -22,19 +22,20 @@ export default class App extends Component {
     getCart()
   }
 
-  onAddToCart ({id, quantity}) {
+  onAddToCart ({Id, Price}, quantity) {
     let cart = this.state.cart
     let i = cart.Items.findIndex(cartItem => {
-      return cartItem.Id === id
+      return cartItem.Id === Id
     })
     if (i >= 0) {
       cart.Items[i] = {
-        Id: id,
+        Id,
         Quantity: cart.Items[i].Quantity + quantity
       }
     } else {
-      cart.Items.push({Id: id, Quantity: quantity})
+      cart.Items.push({Id, Quantity: quantity})
     }
+    cart.Total = cart.Total + (Price * quantity)
     this.setState({cart})
 
     // TODO: Cart doesn't really work. Mocking for now.
@@ -57,7 +58,7 @@ export default class App extends Component {
           <img className={style.header__banner} src={banner} />
         </header>
         <div className={style.main}>
-          <Products products={this.state.products} onAddToCart={({id, quantity}) => this.onAddToCart({id, quantity})} />
+          <Products products={this.state.products} onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
           <Cart cart={this.state.cart} onClear={clearCart} />
         </div>
       </div>
