@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { getCart, getProducts } from '../util/ShopUtil'
+import { addToCart, getCart, getProducts } from '../util/ShopUtil'
 import Products from './product/Products'
 import Cart from './cart/Cart'
 import style from './App.scss'
@@ -19,7 +19,18 @@ export default class App extends Component {
       this.setState({products})
     })
     getCart().then(cart => {
-      console.log('cart', cart)
+      this.setState({cart})
+    })
+  }
+
+  onAddToCart ({id, quantity}) {
+    addToCart({id, quantity}).then(() => {
+      this.updateCart()
+    })
+  }
+
+  updateCart () {
+    getCart().then(cart => {
       this.setState({cart})
     })
   }
@@ -27,7 +38,7 @@ export default class App extends Component {
   render () {
     return (
       <div className={style.main}>
-        <Products products={this.state.products} />
+        <Products products={this.state.products} onAddToCart={({id, quantity}) => this.onAddToCart({id, quantity})} />
         <Cart cart={this.state.cart} />
       </div>
     )

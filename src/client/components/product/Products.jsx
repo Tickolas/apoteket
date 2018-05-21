@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import Product from './Product'
 import style from './Products.scss'
 
-const Products = ({products}) => {
+const Products = ({products, onAddToCart}) => {
   return (
     <div className={style.products}>
       {products.map(product => {
         if (product.Name) {
           return (
-            <Product product={product} />
+            <Product product={product} onAddToCart={onAddToCart} />
           )
         }
       })}
@@ -18,7 +18,8 @@ const Products = ({products}) => {
 }
 
 Products.propTypes = {
-  products: PropTypes.array.isRequired
+  products: PropTypes.array.isRequired,
+  onAddToCart: PropTypes.func.isRequired
 }
 
 export default Products
