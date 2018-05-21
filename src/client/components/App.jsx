@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { addToCart, clearCart, getCart, getProducts } from '../util/ShopUtil'
+import { clearCart, getCart, getProducts } from '../util/ShopUtil'
 import Products from './product/Products'
 import Cart from './cart/Cart'
 import style from './App.scss'
@@ -11,7 +11,7 @@ export default class App extends Component {
 
     this.state = {
       products: [],
-      cart: {}
+      cart: {Items: []}
     }
   }
 
@@ -23,16 +23,32 @@ export default class App extends Component {
   }
 
   onAddToCart ({id, quantity}) {
-    addToCart({id, quantity}).then(() => {
-      this.updateCart()
+    let cart = this.state.cart
+    let i = cart.Items.findIndex(cartItem => {
+      return cartItem.Id === id
     })
+    if (i >= 0) {
+      cart.Items[i] = {
+        Id: id,
+        Quantity: cart.Items[i].Quantity + quantity
+      }
+    } else {
+      cart.Items.push({Id: id, Quantity: quantity})
+    }
+    this.setState({cart})
+
+    // TODO: Cart doesn't really work. Mocking for now.
+    // addToCart({id, quantity}).then(() => {
+    //   this.updateCart()
+    // })
   }
 
-  updateCart () {
-    getCart().then(cart => {
-      this.setState({cart})
-    })
-  }
+  // TODO: Cart doesn't really work. Mocking for now.
+  // updateCart () {
+  //   getCart().then(cart => {
+  //     this.setState({cart})
+  //   })
+  // }
 
   render () {
     return (
