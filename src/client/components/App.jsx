@@ -59,7 +59,7 @@ export default class App extends Component {
         </header>
         <div className={style.main}>
           <Products products={this.state.products} onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
-          <Cart cart={this.state.cart} onClear={clearCart} />
+          <Cart cart={this.state.cart} onClear={() => { this.setState({cart: {Items: [], Total: 0}}) }} products={this.state.products} />
         </div>
       </div>
     )
