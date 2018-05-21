@@ -6,6 +6,13 @@ const getProducts = () => {
   })
 }
 
+const getCart = () => {
+  return axios.get('http://apoteket-uppgift-fe.ginzburg.it/api/cart', {headers: { 'X-Key': 'qwerty' }}).then((result) => {
+    return result.data
+  })
+}
+
 export {
-  getProducts
+  getProducts,
+  getCart
 }
