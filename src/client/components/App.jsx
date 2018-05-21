@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { addToCart, getCart, getProducts } from '../util/ShopUtil'
+import { addToCart, getCart, getProducts, clearCart } from '../util/ShopUtil'
 import Products from './product/Products'
 import Cart from './cart/Cart'
 import style from './App.scss'
@@ -18,9 +18,7 @@ export default class App extends Component {
     getProducts().then(products => {
       this.setState({products})
     })
-    getCart().then(cart => {
-      this.setState({cart})
-    })
+    getCart()
   }
 
   onAddToCart ({id, quantity}) {
@@ -39,7 +37,7 @@ export default class App extends Component {
     return (
       <div className={style.main}>
         <Products products={this.state.products} onAddToCart={({id, quantity}) => this.onAddToCart({id, quantity})} />
-        <Cart cart={this.state.cart} />
+        <Cart cart={this.state.cart} onClear={clearCart} />
       </div>
     )
   }

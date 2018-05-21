@@ -23,8 +23,17 @@ const addToCart = ({id, quantity}) => {
   })
 }
 
+const clearCart = () => {
+  // test API does not support OPTIONS, which is needed for CORS check. Using CORS anywhere bypass.
+  return axios.delete('http://apoteket-uppgift-fe.ginzburg.it/api/cart',
+    {headers: {'X-Key': 'qwerty', 'Access-Control-Allow-Origin': 'http://apoteket-uppgift-fe.ginzburg.it'}}).then((result) => {
+    return result.data
+  })
+}
+
 export {
   getProducts,
   getCart,
-  addToCart
+  addToCart,
+  clearCart
 }
