@@ -28,10 +28,14 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
+          'file-loader',
           {
-            loader: 'file-loader'
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true
+            }
           }
         ]
       }

@@ -1,4 +1,14 @@
+$page-width: 1000px;
+
+.header {
+  width: $page-width;
+}
+
+.header__banner {
+  height: 80px;
+}
+
 .main {
-  width: 1000px;
+  width: $page-width;
   display: flex;
 }

@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
-import { addToCart, getCart, getProducts, clearCart } from '../util/ShopUtil'
+import React, { Component } from 'react'
+import { addToCart, clearCart, getCart, getProducts } from '../util/ShopUtil'
 import Products from './product/Products'
 import Cart from './cart/Cart'
 import style from './App.scss'
+import banner from '../../img/banner.svg'
 
 export default class App extends Component {
   constructor (props) {
@@ -35,9 +36,14 @@ export default class App extends Component {
 
   render () {
     return (
-      <div className={style.main}>
-        <Products products={this.state.products} onAddToCart={({id, quantity}) => this.onAddToCart({id, quantity})} />
-        <Cart cart={this.state.cart} onClear={clearCart} />
+      <div>
+        <header className={style.header}>
+          <img className={style.header__banner} src={banner} />
+        </header>
+        <div className={style.main}>
+          <Products products={this.state.products} onAddToCart={({id, quantity}) => this.onAddToCart({id, quantity})} />
+          <Cart cart={this.state.cart} onClear={clearCart} />
+        </div>
       </div>
     )
   }
