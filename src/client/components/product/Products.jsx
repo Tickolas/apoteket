@@ -1,12 +1,15 @@
 import React from 'react'
-import Product from './Product'
 import PropTypes from 'prop-types'
+import Product from './Product'
+import style from './Products.scss'
 
 const Products = ({products}) => {
   return (
-    <div>
+    <div className={style.products}>
       {products.map(product => {
-        return <Product product={product} />
+        return (
+          <Product product={product} />
+        )
       })}
     </div>
   )

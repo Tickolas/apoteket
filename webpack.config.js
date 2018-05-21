@@ -14,11 +14,9 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' }
-        ]
+      {
+        test: /\.scss$/,
+        use: [ 'style-loader', 'css-loader?modules', 'sass-loader' ]
       },
       {
         test: /\.js$/,
@@ -28,11 +26,23 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true
+            }
+          }
+        ]
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.scss']
   },
   plugins: [HtmlWebpackPluginConfig]
 }
