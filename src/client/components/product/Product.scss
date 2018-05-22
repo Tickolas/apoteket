@@ -5,6 +5,8 @@ $border-color: black;
   width: 200px;
   flex-flow: row wrap;
   position: relative;
+  margin: 2px;
+  padding: 2px;
 
   &.product--disabled {
     color: gray;
@@ -27,6 +29,7 @@ $border-color: black;
 .product__imageContainer {
   max-width: 40px;
   height: 40px;
+  margin: 0 2px 0 2px;
   padding: 2px;
   border: 1px solid $border-color;
   flex: 2;
