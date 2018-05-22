@@ -41,6 +41,11 @@ export default class App extends Component {
   //   })
   // }
 
+  onClearCart () {
+    // TODO: Cart doesn't really work. Mocking for now.
+    this.setState({cart: {Items: [], Total: 0}})
+  }
+
   render () {
     return (
       <div>
@@ -50,7 +55,7 @@ export default class App extends Component {
         <div className={style.main}>
           <Products products={this.state.products}
             onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
-          <Cart cart={this.state.cart} onClear={() => { this.setState({cart: {Items: [], Total: 0}}) }}
+          <Cart cart={this.state.cart} onClear={() => this.onClearCart()}
             products={this.state.products} />
         </div>
       </div>
