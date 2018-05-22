@@ -6,6 +6,8 @@ const updateMockCart = ({Id, Price}, quantity, cart) => {
     let newQuantity = cart.Items[i].Quantity + quantity
     if (newQuantity < 0) {
       newQuantity = 0
+    } else {
+      cart.Total = cart.Total + (Price * quantity)
     }
 
     cart.Items[i] = {
@@ -14,8 +16,8 @@ const updateMockCart = ({Id, Price}, quantity, cart) => {
     }
   } else {
     cart.Items.push({Id, Quantity: quantity})
+    cart.Total = cart.Total + (Price * quantity)
   }
-  cart.Total = cart.Total + (Price * quantity)
 
   return cart
 }
