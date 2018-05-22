@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { clearCart, getCart, getProducts } from '../util/ShopUtil'
+import { getCart, getProducts } from '../util/ShopUtil'
 import Products from './product/Products'
 import Cart from './cart/Cart'
 import style from './App.scss'
 import banner from '../../img/banner.svg'
+import { updateMockCart } from '../util/MockCartUtil'
 
 export default class App extends Component {
   constructor (props) {
@@ -23,22 +24,11 @@ export default class App extends Component {
   }
 
   onAddToCart ({Id, Price}, quantity) {
-    let cart = this.state.cart
-    let i = cart.Items.findIndex(cartItem => {
-      return cartItem.Id === Id
-    })
-    if (i >= 0) {
-      cart.Items[i] = {
-        Id,
-        Quantity: cart.Items[i].Quantity + quantity
-      }
-    } else {
-      cart.Items.push({Id, Quantity: quantity})
-    }
-    cart.Total = cart.Total + (Price * quantity)
-    this.setState({cart})
-
     // TODO: Cart doesn't really work. Mocking for now.
+    this.setState({
+      cart: updateMockCart({Id, Price}, quantity, this.state.cart)
+    })
+
     // addToCart({id, quantity}).then(() => {
     //   this.updateCart()
     // })
@@ -58,8 +48,10 @@ export default class App extends Component {
           <img className={style.header__banner} src={banner} />
         </header>
         <div className={style.main}>
-          <Products products={this.state.products} onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
-          <Cart cart={this.state.cart} onClear={() => { this.setState({cart: {Items: [], Total: 0}}) }} products={this.state.products} />
+          <Products products={this.state.products}
+            onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
+          <Cart cart={this.state.cart} onClear={() => { this.setState({cart: {Items: [], Total: 0}}) }}
+            products={this.state.products} />
         </div>
       </div>
     )
