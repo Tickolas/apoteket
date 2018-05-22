@@ -26,7 +26,7 @@ const Cart = ({cart, onClear, products, showCart}) => {
   }
 
   const getCartContent = () => {
-    if ( cart.Items.length ) {
+    if (cart.Items.length) {
       return cart.Items.map(cartItem => {
         if (cartItem.Quantity) {
           return <CartItem product={productFor(cartItem)} cartItem={cartItem} />
@@ -39,14 +39,14 @@ const Cart = ({cart, onClear, products, showCart}) => {
 
   const getClearCartButton = () => {
     if (cart.Items.length) {
-      return <button onClick={clearCart}>Clear cart</button>
+      return <button className={style.cart__header__clearCart} onClick={clearCart}>Töm varukorg</button>
     }
   }
 
   return (
     <div className={cartClassNames()}>
       <div className={style.cart__header}>
-        <span>Varukorg</span>
+        <span className={style.cart__header__text}>Varukorg</span>
         {getClearCartButton()}
       </div>
       <div className={style.cart__cartItems}>

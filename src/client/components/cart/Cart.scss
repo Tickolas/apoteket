@@ -18,6 +18,22 @@
 .cart__header {
   height: 30px;
   border-bottom: 1px solid black;
+  position: relative;
+}
+
+.cart__header__text {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  margin-left: 5px;
+}
+
+.cart__header__clearCart {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  margin-right: 5px;
 }
 
 .cart__cartItems {
