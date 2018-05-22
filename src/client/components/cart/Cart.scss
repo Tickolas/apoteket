@@ -1,3 +1,14 @@
+@import "../Breakpoints";
+
 .cart {
-  width: 200px;
+  min-width: 200px;
+  min-height: 400px;
+  position: absolute;
+  top: -40px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.cart--disabled {
+  display: none;
 }

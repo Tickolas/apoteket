@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import style from './Cart.scss'
 import CartItem from './CartItem'
+import classnames from 'classnames'
 
-const Cart = ({cart, onClear, products}) => {
+const Cart = ({cart, onClear, products, showCart}) => {
   const clearCart = () => {
     if (window.confirm('Really clear the cart?')) {
       onClear()
@@ -16,8 +17,16 @@ const Cart = ({cart, onClear, products}) => {
     })
   }
 
+  const cartClassNames = () => {
+    if (showCart) {
+      return style.cart
+    } else {
+      return classnames(style.cart, style['cart--disabled'])
+    }
+  }
+
   return (
-    <div className={style.cart}>
+    <div className={cartClassNames()}>
       <div>
         <span>Cart</span>
         <button onClick={clearCart}>Clear cart</button>
@@ -37,7 +46,8 @@ const Cart = ({cart, onClear, products}) => {
 Cart.propTypes = {
   cart: PropTypes.object.isRequired,
   onClear: PropTypes.func.isRequired,
-  products: PropTypes.array.isRequired
+  products: PropTypes.array.isRequired,
+  showCart: PropTypes.bool
 }
 
 export default Cart

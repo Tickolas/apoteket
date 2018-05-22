@@ -1,12 +1,4 @@
-$page-width: 1000px;
-
-.header {
-  max-width: $page-width;
-}
-
-.header__banner {
-  height: 80px;
-}
+@import "Variables";
 
 .main {
   max-width: $page-width;

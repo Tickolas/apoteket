@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { getCart, getProducts } from '../util/ShopUtil'
 import Products from './product/Products'
-import Cart from './cart/Cart'
 import style from './App.scss'
-import banner from '../../img/banner.svg'
 import { updateMockCart } from '../util/MockCartUtil'
+import Header from './Header/Header'
 
 export default class App extends Component {
   constructor (props) {
@@ -12,7 +11,8 @@ export default class App extends Component {
 
     this.state = {
       products: [],
-      cart: {Items: [], Total: 0}
+      cart: {Items: [], Total: 0},
+      showCart: false
     }
   }
 
@@ -49,14 +49,10 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <header className={style.header}>
-          <img className={style.header__banner} src={banner} />
-        </header>
+        <Header onShowCart={() => this.setState({showCart: !this.state.showCart})} cart={this.state.cart} onClearCart={() => this.onClearCart()} products={this.state.products} showCart={this.state.showCart} />
         <div className={style.main}>
           <Products products={this.state.products}
             onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
-          <Cart cart={this.state.cart} onClear={() => this.onClearCart()}
-            products={this.state.products} />
         </div>
       </div>
     )
