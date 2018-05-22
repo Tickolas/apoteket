@@ -4,10 +4,24 @@ $border-color: black;
   display: flex;
   width: 200px;
   flex-flow: row wrap;
+  position: relative;
+
+  &.product--disabled {
+    color: gray;
+  }
 }
 
 .product--disabled {
-  background-color: gray;
+  &::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: gray;
+    opacity: 0.2;
+  }
 }
 
 .product__imageContainer {

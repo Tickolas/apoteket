@@ -18,11 +18,18 @@ const Cart = ({cart, onClear, products}) => {
 
   return (
     <div className={style.cart}>
-      <div>Cart</div>
-      <button onClick={clearCart}>Clear cart</button>
-      {cart.Items.map(cartItem => {
-        return <CartItem product={productFor(cartItem)} cartItem={cartItem} />
-      })}
+      <div>
+        <span>Cart</span>
+        <button onClick={clearCart}>Clear cart</button>
+      </div>
+      <div className={style.cart__total}>Total: {Number.parseFloat(cart.Total).toFixed(2)}:-</div>
+      <div className={style.cart__cartItems}>
+        {cart.Items.map(cartItem => {
+          if (cartItem.Quantity) {
+            return <CartItem product={productFor(cartItem)} cartItem={cartItem} />
+          }
+        })}
+      </div>
     </div>
   )
 }

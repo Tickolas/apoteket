@@ -27,6 +27,7 @@ const Product = ({product, onAddToCart}) => {
       <div className={style.product__name}>{product.Name}</div>
       <div className={style.product__description}>{product.Description}</div>
       <div className={style.product__buttons}>
+        <span>{Number.parseFloat(product.Price).toFixed(2)}:- </span>
         <button onClick={() => onAddToCart(product, 1)}>+</button>
         <button onClick={() => onAddToCart(product, -1)}>-</button>
       </div>

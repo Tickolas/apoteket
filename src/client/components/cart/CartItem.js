@@ -5,7 +5,7 @@ import style from './CartItem.scss'
 const CartItem = ({product, cartItem}) => {
   return (
     <div className={style.cartItem}>
-      {product.Name} - {product.Price}:- [{cartItem.Quantity}]
+      {product.Name} - {Number.parseFloat(product.Price).toFixed(2)}:- [{cartItem.Quantity}]
     </div>
   )
 }
