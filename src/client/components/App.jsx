@@ -4,19 +4,21 @@ import Products from './product/Products'
 import style from './App.scss'
 import { updateMockCart } from '../util/MockCartUtil'
 import Header from './Header/Header'
-import store from '../reducers/Reducer'
+import { connect } from 'react-redux'
+import { LOAD_PRODUCTS } from '../actions/ProductActions'
+import PropTypes from 'prop-types'
 
-export default class App extends Component {
+class App extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      products: [],
       cart: {Items: [], Total: 0}
     }
   }
 
   componentDidMount () {
+    this.props.loadProducts()
     getProducts().then(products => {
       this.setState({products})
     })
@@ -49,12 +51,24 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Header store={store} cart={this.state.cart} onClearCart={() => this.onClearCart()} products={this.state.products} />
+        <Header store={this.props.store} cart={this.state.cart} onClearCart={() => this.onClearCart()} />
         <div className={style.main}>
-          <Products products={this.state.products}
-            onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
+          <Products store={this.props.store} onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
         </div>
       </div>
     )
   }
 }
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+  loadProducts: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadProducts: () => dispatch({type: LOAD_PRODUCTS})
+  }
+}
+
+export default connect(state => state, mapDispatchToProps)(App)

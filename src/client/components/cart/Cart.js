@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import style from './Cart.scss'
 import CartItem from './CartItem'
 import classnames from 'classnames'
+import { connect } from 'react-redux'
 
 const Cart = ({cart, onClear, products, showCart}) => {
   const clearCart = () => {
@@ -64,4 +65,10 @@ Cart.propTypes = {
   showCart: PropTypes.bool
 }
 
-export default Cart
+const mapStateToProps = (state) => {
+  return {
+    products: state.productsReducer.products
+  }
+}
+
+export default connect(mapStateToProps)(Cart)
