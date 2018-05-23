@@ -1,8 +1,13 @@
 import axios from 'axios'
+import store from '../Store'
+import { PRODUCTS_LOADED } from '../actions/ProductActions'
 
 const getProducts = () => {
   return axios.get('http://apoteket-uppgift-fe.ginzburg.it/api/products').then((result) => {
-    return result.data
+    store.dispatch({
+      type: PRODUCTS_LOADED,
+      products: result.data
+    })
   })
 }
 
