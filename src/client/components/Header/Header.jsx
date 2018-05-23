@@ -9,7 +9,7 @@ const Header = ({cart, onShowCart, onClearCart, products, showCart}) => {
     <header className={style.header}>
       <img className={style.header__banner} src={banner} />
       <button className={style.header__showCartButton} onClick={onShowCart}>
-        =
+        Varukorg ({cart.Items.le} varor)
       </button>
       <Cart cart={cart} onClear={onClearCart} products={products} showCart={showCart} />
     </header>
