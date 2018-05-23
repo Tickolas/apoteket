@@ -4,15 +4,13 @@ import Product from './Product'
 import style from './Products.scss'
 import { connect } from 'react-redux'
 
-const Products = ({products, onAddToCart}) => {
+const Products = ({store, products}) => {
   return (
     <div className={style.products}>
       {
         products.map(product => {
           if (product.Name) {
-            return (
-              <Product product={product} onAddToCart={onAddToCart} />
-            )
+            return (<Product store={store} product={product} />)
           }
         })
       }
@@ -21,8 +19,8 @@ const Products = ({products, onAddToCart}) => {
 }
 
 Products.propTypes = {
-  products: PropTypes.array.isRequired,
-  onAddToCart: PropTypes.func.isRequired
+  store: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => {

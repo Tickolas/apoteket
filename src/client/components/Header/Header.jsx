@@ -6,24 +6,21 @@ import Cart from '../cart/Cart'
 import { connect } from 'react-redux'
 import { TOGGLE_CART } from '../../actions/CartActions'
 
-const Header = ({store, cart, onShowCart, onClearCart, showCart, cartSize}) => {
+const Header = ({store, onShowCart, cartSize}) => {
   return (
     <header className={style.header}>
       <img className={style.header__banner} src={banner} />
       <button className={style.header__showCartButton} onClick={onShowCart}>
         Varukorg ({cartSize} varor)
       </button>
-      <Cart store={store} cart={cart} onClear={onClearCart} showCart={showCart} />
+      <Cart store={store} />
     </header>
   )
 }
 
 Header.propTypes = {
   store: PropTypes.object.isRequired,
-  cart: PropTypes.object.isRequired,
   onShowCart: PropTypes.func.isRequired,
-  onClearCart: PropTypes.func.isRequired,
-  showCart: PropTypes.bool,
   cartSize: PropTypes.number
 }
 

@@ -4,14 +4,10 @@ import style from './Cart.scss'
 import CartItem from './CartItem'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
+import { CLEAR_CART } from '../../actions/CartActions'
 
-const Cart = ({cart, onClear, products, showCart}) => {
-  const clearCart = () => {
-    if (window.confirm('Really clear the cart?')) {
-      onClear()
-    }
-  }
-
+const Cart = ({cart, onClearCart, products, showCart}) => {
+  console.log('cart upda', cart, products)
   const productFor = cartItem => {
     return products.find(product => {
       return product.Id === cartItem.Id
@@ -40,7 +36,7 @@ const Cart = ({cart, onClear, products, showCart}) => {
 
   const getClearCartButton = () => {
     if (cart.Items.length) {
-      return <button className={style.cart__header__clearCart} onClick={clearCart}>Töm varukorg</button>
+      return <button className={style.cart__header__clearCart} onClick={onClearCart}>Töm varukorg</button>
     }
   }
 
@@ -60,15 +56,27 @@ const Cart = ({cart, onClear, products, showCart}) => {
 
 Cart.propTypes = {
   cart: PropTypes.object.isRequired,
-  onClear: PropTypes.func.isRequired,
+  onClearCart: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
   showCart: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {
   return {
+    showCart: state.cartReducer.showCart,
+    cart: state.cartReducer.cart,
     products: state.productsReducer.products
   }
 }
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClearCart: () => {
+      if (window.confirm('Töm varukorgen?')) {
+        dispatch({type: CLEAR_CART})
+      }
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

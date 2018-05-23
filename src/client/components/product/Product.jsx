@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import style from './Product.scss'
 import logo from '../../../img/apotek.png'
 import classnames from 'classnames'
+import { connect } from 'react-redux'
+import { ADD_TO_CART } from '../../actions/CartActions'
 
 const Product = ({product, onAddToCart}) => {
   function getProductImage () {
@@ -40,4 +42,13 @@ Product.propTypes = {
   onAddToCart: PropTypes.func.isRequired
 }
 
-export default Product
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddToCart: (product, quantity) => {
+      console.log('dispatch ADD_TO_CART')
+      dispatch({type: ADD_TO_CART, product, quantity})
+    }
+  }
+}
+
+export default connect(state => state, mapDispatchToProps)(Product)
