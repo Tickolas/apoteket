@@ -6,12 +6,12 @@ import Cart from '../cart/Cart'
 import {connect} from 'react-redux'
 import { TOGGLE_CART } from '../../actions/CartActions'
 
-const Header = ({cart, onShowCart, onClearCart, products, showCart}) => {
+const Header = ({cart, onShowCart, onClearCart, products, showCart, cartSize}) => {
   return (
     <header className={style.header}>
       <img className={style.header__banner} src={banner} />
       <button className={style.header__showCartButton} onClick={onShowCart}>
-        Varukorg ({cart.Items.length} varor)
+        Varukorg ({cartSize} varor)
       </button>
       <Cart cart={cart} onClear={onClearCart} products={products} showCart={showCart} />
     </header>
@@ -23,12 +23,14 @@ Header.propTypes = {
   onShowCart: PropTypes.func.isRequired,
   onClearCart: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
-  showCart: PropTypes.bool
+  showCart: PropTypes.bool,
+  cartSize: PropTypes.number
 }
 
 const mapStateToProps = (state) => {
   return {
-    showCart: state.showCart
+    showCart: state.showCart,
+    cartSize: state.cart.Items.length
   }
 }
 

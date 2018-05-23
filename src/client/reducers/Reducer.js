@@ -2,7 +2,8 @@ import {createStore} from 'redux'
 import { TOGGLE_CART } from '../actions/CartActions'
 
 const initialState = {
-  showCart: false
+  showCart: false,
+  cart: {Items: [], Total: 0}
 }
 
 const reducer = (state = initialState, action) => {
