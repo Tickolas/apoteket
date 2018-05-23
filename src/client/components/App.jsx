@@ -4,6 +4,7 @@ import Products from './product/Products'
 import style from './App.scss'
 import { updateMockCart } from '../util/MockCartUtil'
 import Header from './Header/Header'
+import store from '../reducers/Reducer'
 
 export default class App extends Component {
   constructor (props) {
@@ -11,8 +12,7 @@ export default class App extends Component {
 
     this.state = {
       products: [],
-      cart: {Items: [], Total: 0},
-      showCart: false
+      cart: {Items: [], Total: 0}
     }
   }
 
@@ -49,7 +49,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Header onShowCart={() => this.setState({showCart: !this.state.showCart})} cart={this.state.cart} onClearCart={() => this.onClearCart()} products={this.state.products} showCart={this.state.showCart} />
+        <Header store={store} cart={this.state.cart} onClearCart={() => this.onClearCart()} products={this.state.products} />
         <div className={style.main}>
           <Products products={this.state.products}
             onAddToCart={(product, quantity) => this.onAddToCart(product, quantity)} />
