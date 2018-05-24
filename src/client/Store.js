@@ -1,6 +1,6 @@
-import { createStore, combineReducers } from 'redux'
-import cartReducer, {initialState as cartReducerInitialState} from './reducers/CartReducer'
-import productsReducer, {initialState as productsReducerInitialState} from './reducers/ProductsReducer'
+import { combineReducers, createStore } from 'redux'
+import cartReducer, { initialState as cartReducerInitialState } from './reducers/CartReducer'
+import productsReducer, { initialState as productsReducerInitialState } from './reducers/ProductsReducer'
 
 const store = createStore(
   combineReducers({cartReducer, productsReducer}),
