@@ -12,9 +12,9 @@ const cartReducer = (state = initialState, action) => {
       return {...state, showCart: !state.showCart}
     }
     case ADD_TO_CART: {
-      console.log('ADD_TO_CART', action)
       const cart = updateMockCart(action.product, action.quantity, state.cart)
       return {...state, cart}
+      // TODO: Enable real API call
       // addToCart({product: action.product, quantity: action.quantity})
       // return state
     }

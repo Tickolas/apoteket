@@ -45,7 +45,6 @@ Product.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddToCart: (product, quantity) => {
-      console.log('dispatch ADD_TO_CART')
       dispatch({type: ADD_TO_CART, product, quantity})
     }
   }

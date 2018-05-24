@@ -1,5 +1,4 @@
 const updateMockCart = (product, quantity, cart) => {
-  console.log('Mocking')
   const i = cart.Items.findIndex(cartItem => {
     return cartItem.Id === product.Id
   })

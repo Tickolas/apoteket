@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { CLEAR_CART } from '../../actions/CartActions'
 
 const Cart = ({cart, onClearCart, products, showCart}) => {
-  console.log('cart upda', cart, products)
   const productFor = cartItem => {
     return products.find(product => {
       return product.Id === cartItem.Id
