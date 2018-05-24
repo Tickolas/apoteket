@@ -1,3 +1,5 @@
+export const GET_CART = 'GET_CART'
+export const CART_LOADED = 'CART_LOADED'
 export const TOGGLE_CART = 'TOGGLE_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const CLEAR_CART = 'ADD_TO_CART'

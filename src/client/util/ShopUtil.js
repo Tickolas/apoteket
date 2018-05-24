@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '../Store'
 import { PRODUCTS_LOADED } from '../actions/ProductActions'
+import { CART_LOADED } from '../actions/CartActions'
 
 const getProducts = () => {
   return axios.get('http://apoteket-uppgift-fe.ginzburg.it/api/products').then((result) => {
@@ -12,24 +13,29 @@ const getProducts = () => {
 }
 
 const getCart = () => {
-  // test API does not support OPTIONS, which is needed for CORS check. Using CORS anywhere bypass.
-  return axios.get('https://cors-anywhere.herokuapp.com/http://apoteket-uppgift-fe.ginzburg.it/api/cart',
+  return axios.get('http://apoteket-uppgift-fe.ginzburg.it/api/cart',
     {headers: { 'X-Key': 'qwerty' }}).then((result) => {
-    return result.data
+    const cart = result.data
+    store.dispatch({
+      type: CART_LOADED,
+      payload: {
+        cart: cart
+      }
+    })
   })
 }
 
-const addToCart = ({id, quantity}) => {
-  // test API does not support OPTIONS, which is needed for CORS check. Using CORS anywhere bypass.
-  return axios.post('https://cors-anywhere.herokuapp.com/http://apoteket-uppgift-fe.ginzburg.it/api/cart',
+const addToCart = (id, quantity) => {
+  return axios.post('http://apoteket-uppgift-fe.ginzburg.it/api/cart',
     {Id: id, Quantity: quantity},
-    {headers: {'X-Key': 'qwerty', 'Access-Control-Allow-Origin': '*'}}).then((result) => {
-    return result.data
-  })
+    {headers: {'X-Key': 'qwerty', 'Access-Control-Allow-Origin': '*'}})
+    .then(getCart)
+    .catch(e => {
+      console.error('Failed adding to cart.', e)
+    })
 }
 
 const clearCart = () => {
-  // test API does not support OPTIONS, which is needed for CORS check. Using CORS anywhere bypass.
   return axios.delete('http://apoteket-uppgift-fe.ginzburg.it/api/cart',
     {headers: {'X-Key': 'qwerty', 'Access-Control-Allow-Origin': 'http://apoteket-uppgift-fe.ginzburg.it'}}).then((result) => {
     return result.data
